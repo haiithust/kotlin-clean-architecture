@@ -1,0 +1,87 @@
+allprojects {
+  repositories {
+    jcenter()
+  }
+}
+
+ext {
+  //Android
+  androidMinSdkVersion = 21
+  androidTargetSdkVersion = 27
+  androidCompileSdkVersion = 27
+
+  //Libraries
+  daggerVersion = '2.16'
+  butterKnifeVersion = '7.0.1'
+  supportLibraryVersion = '27.1.1'
+  rxJavaVersion = '2.0.2'
+  rxAndroidVersion = '2.0.1'
+  javaxAnnotationVersion = '1.0'
+  javaxInjectVersion = '1'
+  gsonVersion = '2.8.2'
+  androidAnnotationsVersion = '21.0.3'
+  arrowVersion = '1.0.0'
+  constraintLayout = '1.1.2'
+  retrofitVersion = '2.4.0'
+  retrofitConverterVersion = '2.3.0'
+  okHttpLogVersion = '3.11.0'
+  greendao = '3.2.2'
+
+  //Development
+  leakCanaryVersion = '1.3.1'
+
+  presentationDependencies = [
+      daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+      dagger:             "com.google.dagger:dagger:${daggerVersion}",
+      butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
+      recyclerView:       "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+      rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+      rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+      javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+      appCompat:          "com.android.support:appcompat-v7:${supportLibraryVersion}",
+      constraintLayout:   "com.android.support.constraint:constraint-layout:${constraintLayout}",
+      kotlin:             "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+      greendao:           "org.greenrobot:greendao:$greendao"
+  ]
+
+  presentationTestDependencies = [
+
+  ]
+
+  domainDependencies = [
+      javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+      javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
+      rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+      arrow:              "com.fernandocejas:arrow:${arrowVersion}",
+      kotlin:             "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+  ]
+
+  domainTestDependencies = [
+
+  ]
+
+  dataDependencies = [
+      daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+      dagger:             "com.google.dagger:dagger:${daggerVersion}",
+      gson:               "com.google.code.gson:gson:${gsonVersion}",
+      rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+      rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+      javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+      javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
+      androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}",
+      retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+      retrofitAdapter:    "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+      retrofitConverter:  "com.squareup.retrofit2:converter-gson:${retrofitConverterVersion}",
+      okHttpLog:          "com.squareup.okhttp3:logging-interceptor:${okHttpLogVersion}",
+      kotlin:             "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+      greendao:           "org.greenrobot:greendao:$greendao"
+  ]
+
+  dataTestDependencies = [
+
+  ]
+
+  developmentDependencies = [
+      leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+  ]
+}

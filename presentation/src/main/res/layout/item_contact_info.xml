@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_normal_double"
+    android:layout_marginStart="@dimen/margin_normal"
+    android:layout_marginEnd="@dimen/margin_normal"
+    android:layout_marginTop="@dimen/margin_normal"
+    android:background="@drawable/bg_white_radius">
+
+    <TextView
+        android:id="@+id/tv_first_character"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/txt_white"
+        tools:text="T"
+        android:gravity="center"
+        android:background="@drawable/bg_circle" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_normal_double"
+        android:layout_toEndOf="@+id/tv_first_character"
+        android:lines="1"
+        android:ellipsize="end"
+        android:textSize="@dimen/txt_normal"
+        android:textStyle="bold"
+        android:textColor="@color/txt_title"
+        tools:text="Michael Thomas"
+        />
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_normal_double"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_below="@+id/tv_name"
+        android:layout_toEndOf="@+id/tv_first_character"
+        android:lines="1"
+        android:ellipsize="end"
+        android:textSize="@dimen/txt_normal"
+        android:textColor="@color/txt_sub_title"
+        tools:text="0167 4733909"
+        />
+
+</RelativeLayout>

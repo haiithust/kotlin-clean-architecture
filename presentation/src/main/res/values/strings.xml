@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Base Application</string>
+    <string name="ex_error_server">Server error</string>
+    <string name="ex_error_unknown">unknown error</string>
+</resources>

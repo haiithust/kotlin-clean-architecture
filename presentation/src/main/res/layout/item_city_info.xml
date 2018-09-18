@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/margin_normal"
+    android:layout_marginStart="@dimen/margin_normal"
+    android:layout_marginTop="@dimen/margin_normal"
+    android:background="@drawable/bg_white_radius"
+    android:minHeight="48dp"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_normal_double">
+
+    <TextView
+        android:id="@+id/tv_city_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/txt_title"
+        android:textSize="@dimen/txt_normal"
+        android:textStyle="bold"
+        tools:text="Hà Nội" />
+
+    <TextView
+        android:id="@+id/tv_country_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/txt_sub_title"
+        android:textSize="@dimen/txt_small"
+        tools:text="VN" />
+</LinearLayout>
