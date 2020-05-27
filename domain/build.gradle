@@ -7,7 +7,6 @@ dependencies {
     implementation domainDependencies.javaxAnnotation
 
     implementation domainDependencies.javaxInject
-    implementation domainDependencies.arrow
     implementation domainDependencies.kotlin
 }
 buildscript {
