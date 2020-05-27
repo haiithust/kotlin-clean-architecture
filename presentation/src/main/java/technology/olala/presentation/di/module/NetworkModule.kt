@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class NetworkModule {
     @Provides
     @Singleton
-    internal fun provideApiConnection(): ApiConnection {
+    fun provideApiConnection(): ApiConnection {
         return ApiConnection()
     }
 }

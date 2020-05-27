@@ -1,7 +1,7 @@
 package technology.olala.presentation.ui.util
 
 import android.content.Context
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast

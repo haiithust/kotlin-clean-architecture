@@ -1,20 +1,27 @@
 package technology.olala.presentation.di.module
 
 
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import technology.olala.data.cache.UserCached
-import technology.olala.data.cache.impl.UserCachedImpl
+import technology.olala.data.cache.impl.DatabaseCached
+import technology.olala.data.cache.impl.FileCached
+import technology.olala.data.cache.impl.SharePreferenceCached
 import technology.olala.presentation.di.scope.UserScope
 
 /**
  * @author conghai on 7/17/18.
  */
 @Module
-class CachedModule {
-    @Provides
+abstract class CachedModule {
+    @Binds
     @UserScope
-    internal fun provideDataCached(dataCached: UserCachedImpl): UserCached {
-        return dataCached
-    }
+    abstract fun provideSharePreferenceCached(cached: SharePreferenceCached): SharePreferenceCached
+
+    @Binds
+    @UserScope
+    abstract fun provideFileCached(cached: FileCached): FileCached
+
+    @Binds
+    @UserScope
+    abstract fun provideDatabaseCached(cached: DatabaseCached): DatabaseCached
 }

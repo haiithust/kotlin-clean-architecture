@@ -1,11 +1,11 @@
 package technology.olala.domain.repository
 
-import io.reactivex.Observable
 import technology.olala.domain.model.CityInfo
+import technology.olala.domain.response.Result
 
 /**
  * @author conghai on 8/9/18.
  */
 interface CityRepository {
-    val cityList: Observable<List<CityInfo>>
+    suspend fun getCityList(): Result<List<CityInfo>>
 }

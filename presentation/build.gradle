@@ -7,17 +7,15 @@ apply plugin: 'kotlin-kapt'
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
-    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
 
     defaultConfig {
-        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
-        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
 
-        applicationId globalConfiguration.getAt("androidApplicationId")
-        versionCode globalConfiguration.getAt("androidVersionCode")
-        versionName globalConfiguration.getAt("androidVersionName")
-        testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
-        testApplicationId globalConfiguration.getAt("testApplicationId")
+        applicationId globalConfiguration["androidApplicationId"]
+        versionCode globalConfiguration["androidVersionCode"]
+        versionName globalConfiguration["androidVersionName"]
     }
     buildTypes {
         release {
@@ -29,6 +27,10 @@ android {
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     kapt {
@@ -55,13 +57,16 @@ dependencies {
     implementation presentationDependencies.dagger
     implementation presentationDependencies.appCompat
     implementation presentationDependencies.recyclerView
-    implementation presentationDependencies.rxJava
-    implementation presentationDependencies.rxAndroid
     implementation presentationDependencies.constraintLayout
     implementation presentationDependencies.kotlin
     implementation presentationDependencies.greendao
-    kapt "com.google.dagger:dagger-compiler:2.16"
-
-    //Development
-    //implementation developmentDependencies.leakCanary
+    kapt "com.google.dagger:dagger-compiler:2.26"
+    implementation "androidx.fragment:fragment-ktx:1.2.4"
+    implementation "androidx.activity:activity-ktx:1.1.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    implementation "androidx.core:core-ktx:1.2.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+    implementation 'com.google.android.material:material:1.1.0'
 }

@@ -5,17 +5,21 @@ apply plugin: 'kotlin-android'
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
-    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
 
     defaultConfig {
-        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
-        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
-        versionCode globalConfiguration.getAt("androidVersionCode")
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        versionCode globalConfiguration["androidVersionCode"]
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     packagingOptions {
@@ -42,8 +46,6 @@ dependencies {
     implementation dataDependencies.javaxAnnotation
     implementation dataDependencies.javaxInject
     implementation dataDependencies.gson
-    implementation dataDependencies.rxJava
-    implementation dataDependencies.rxAndroid
     implementation dataDependencies.androidAnnotations
     implementation dataDependencies.retrofit
     implementation dataDependencies.retrofitAdapter

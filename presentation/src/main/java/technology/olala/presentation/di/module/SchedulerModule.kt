@@ -2,10 +2,7 @@ package technology.olala.presentation.di.module
 
 import dagger.Module
 import dagger.Provides
-import technology.olala.data.scheduler.WorkSchedulerImpl
-import technology.olala.domain.scheduler.ResultScheduler
-import technology.olala.domain.scheduler.WorkScheduler
-import technology.olala.presentation.scheduler.ResultSchedulerImpl
+import technology.olala.presentation.scheduler.CoroutinesDispatcherProvider
 import javax.inject.Singleton
 
 /**
@@ -13,15 +10,10 @@ import javax.inject.Singleton
  */
 @Module
 class SchedulerModule {
-    @Provides
-    @Singleton
-    internal fun provideWorkScheduler(): WorkScheduler {
-        return WorkSchedulerImpl()
-    }
 
     @Provides
     @Singleton
-    internal fun provideResultScheduler(): ResultScheduler {
-        return ResultSchedulerImpl()
+    fun provideCoroutinesDispatcher() : CoroutinesDispatcherProvider {
+        return CoroutinesDispatcherProvider()
     }
 }

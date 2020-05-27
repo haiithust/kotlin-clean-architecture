@@ -1,23 +1,29 @@
 package technology.olala.presentation.di.component
 
-import android.content.Context
+import android.app.Application
+import dagger.BindsInstance
 import dagger.Component
 import technology.olala.data.net.ApiConnection
-import technology.olala.domain.scheduler.ResultScheduler
-import technology.olala.domain.scheduler.WorkScheduler
-import technology.olala.presentation.di.module.ApplicationModule
 import technology.olala.presentation.di.module.NetworkModule
 import technology.olala.presentation.di.module.SchedulerModule
+import technology.olala.presentation.scheduler.CoroutinesDispatcherProvider
 import javax.inject.Singleton
 
 /**
  * @author conghai on 7/7/18.
  */
 @Singleton
-@Component(modules = [ApplicationModule::class, NetworkModule::class, SchedulerModule::class])
+@Component(modules = [NetworkModule::class, SchedulerModule::class])
 interface ApplicationComponent {
-    val applicationContext: Context
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        fun application(application: Application): Builder
+
+        fun build(): ApplicationComponent
+    }
+
+    fun application(): Application
     fun apiConnection(): ApiConnection
-    fun workScheduler(): WorkScheduler
-    fun resultScheduler(): ResultScheduler
+    fun dispatcher(): CoroutinesDispatcherProvider
 }

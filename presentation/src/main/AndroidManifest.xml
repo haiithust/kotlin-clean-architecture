@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="technology.olala.baseproject">
 
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
     <application
         android:name="technology.olala.presentation.BaseApplication"
@@ -25,10 +25,11 @@
         </activity>
 
         <activity
-            android:name="technology.olala.presentation.ui.home.ContactActivity"
-            android:theme="@style/MainActivty"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name="technology.olala.presentation.ui.city.CityActivity" />
+            android:name="technology.olala.presentation.ui.contact.ContactActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="technology.olala.presentation.ui.city.CityActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

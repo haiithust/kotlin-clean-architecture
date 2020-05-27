@@ -1,90 +1,66 @@
-/**
- * Copyright (C) 2014 android10.org. All rights reserved.
- *
- * @author Fernando Cejas (the android10 coder)
- */
 package technology.olala.presentation.ui.base
 
-import android.app.Fragment
 import android.os.Bundle
-
-import technology.olala.presentation.ui.util.UIUtils
+import android.view.View
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import technology.olala.presentation.ui.view.LoadingDialog
+import javax.inject.Inject
 
 /**
  * @author conghai on 7/9/18.
  */
-abstract class BaseFragment<V : BasePresenter<*>> : Fragment(), BaseCallback {
-    protected var mPresenter: V? = null
-    private var mLoadingDialog: LoadingDialog? = null
+abstract class BaseFragment(
+        @LayoutRes layoutId: Int
+) : Fragment(layoutId) {
+    @Inject
+    internal lateinit var factory: ViewModelProvider.Factory
 
-    init {
-        retainInstance = true
-    }
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(requireContext()) }
+
+    abstract fun initUI()
+
+
+    abstract fun inject()
+
+    protected open fun registerEvents() {}
+
+    protected open fun observe() {}
+
+    protected open fun loadData() {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter = createPresenter()
-        mPresenter?.create()
+        inject()
     }
 
-    protected abstract fun createPresenter(): V?
-
-    override fun onStart() {
-        super.onStart()
-        mPresenter?.start()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initUI()
+        registerEvents()
+        observe()
     }
 
-    override fun onPause() {
-        super.onPause()
-        mPresenter?.pause()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        loadData()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mPresenter?.destroy()
-        mLoadingDialog = null
+    override fun onDestroyView() {
+        hideLoading()
+        super.onDestroyView()
     }
 
-    // todo implement
-    override fun showLoading() {
-        showLoading("", false)
+    protected fun handleLoading(isShow: Boolean) {
+        if (isShow) showLoading() else hideLoading()
     }
 
-    override fun hideLoading() {
-        mLoadingDialog?.close()
+    private fun showLoading() {
+        loadingDialog.show()
     }
 
-    override fun showEmpty() {
-        // todo waiting design
-    }
-
-    override fun hideEmpty() {
-        // todo waiting design
-    }
-
-    override fun showError(messageId: Int) {
-        UIUtils.showShortToast(activity, messageId)
-    }
-
-    override fun showNoNetworkAvailable() {
-        // todo waiting design
-    }
-
-    private fun showLoading(msg: String, cancelable: Boolean) {
-        if (activity == null || activity.isFinishing) return
-
-        if (mLoadingDialog == null) {
-            mLoadingDialog = LoadingDialog(activity)
-        } else {
-            if (mLoadingDialog?.isShowing == true) {
-                mLoadingDialog?.setMessage(msg)
-                return
-            }
-        }
-
-        mLoadingDialog?.setMessage(msg)
-        mLoadingDialog?.setOperationCancelable(cancelable)
-        mLoadingDialog?.show()
+    private fun hideLoading() {
+        loadingDialog.dismiss()
     }
 }

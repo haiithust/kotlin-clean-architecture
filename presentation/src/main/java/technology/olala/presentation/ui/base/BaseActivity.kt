@@ -1,79 +1,32 @@
 package technology.olala.presentation.ui.base
 
-import android.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import technology.olala.presentation.ui.util.UIUtils
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import technology.olala.presentation.ui.view.LoadingDialog
 
 /**
  * @author conghai on 7/9/18.
  */
-open class BaseActivity : AppCompatActivity(), BaseCallback {
-    private var mLoadingDialog: LoadingDialog? = null
-    private var mCompositeDisposable = CompositeDisposable()
+abstract class BaseActivity : AppCompatActivity() {
+    private val loadingDialog: LoadingDialog by lazy { LoadingDialog(this) }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mCompositeDisposable.clear()
-        mLoadingDialog = null
-    }
-
-    protected fun injectFragment(containerViewId: Int, fragment: Fragment?, tag : String = "") {
-        val fragmentTransaction = this.fragmentManager.beginTransaction()
-        fragmentTransaction.replace(containerViewId, fragment, tag)
-        fragmentTransaction.commit()
-    }
-
-    /*
-    Handle base callback
-     */
-    override fun showLoading() {
-        showLoading("", false)
-    }
-
-    override fun hideLoading() {
-        mLoadingDialog?.close()
-    }
-
-    override fun showEmpty() {
-
-    }
-
-    override fun hideEmpty() {
-
-    }
-
-    override fun showError(messageId: Int) {
-        UIUtils.showShortToast(this, messageId)
-    }
-
-    override fun showNoNetworkAvailable() {
-        // todo waiting design
-    }
-
-    /*
-    Support function
-     */
-    protected fun addDisposable(disposable: Disposable) {
-        mCompositeDisposable.add(disposable)
-    }
-
-    private fun showLoading(msg: String, cancelable: Boolean) {
-        if (isFinishing) return
-
-        if (mLoadingDialog == null) {
-            mLoadingDialog = LoadingDialog(this)
-        } else {
-            if (mLoadingDialog?.isShowing == true) {
-                mLoadingDialog?.setMessage(msg)
-                return
-            }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState == null) {
+            initFragment()
         }
-
-        mLoadingDialog?.setMessage(msg)
-        mLoadingDialog?.setOperationCancelable(cancelable)
-        mLoadingDialog?.show()
+        observe()
     }
+
+    protected open fun observe() {}
+
+    private fun showLoading() {
+        loadingDialog.show()
+    }
+
+    private fun hideLoading() {
+        loadingDialog.dismiss()
+    }
+
+    protected open fun initFragment() {}
 }
